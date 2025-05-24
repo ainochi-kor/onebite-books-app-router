@@ -1,9 +1,12 @@
 import React, { PropsWithChildren } from "react";
+import SearchBar from "../../components/searchbar";
 
 const SearchLayout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <div>
-      <div>임시 서치바</div>
+      <div>
+        <SearchBar />
+      </div>
       {children}
     </div>
   );
