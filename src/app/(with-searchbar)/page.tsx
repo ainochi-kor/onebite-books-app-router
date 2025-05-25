@@ -6,7 +6,10 @@ import { env } from "process";
 
 async function AllBooks() {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`,
+    {
+      cache: "no-store", // 매번 최신 데이터를 가져오기 위해 캐시를 사용하지 않음
+    }
   );
   if (!response.ok) {
     return <div>오류가 발생했습니다. ...</div>;
@@ -25,7 +28,12 @@ async function AllBooks() {
 
 async function RecoBooks() {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/random`
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/random`,
+    {
+      next: {
+        revalidate: 3,
+      },
+    }
   );
   if (!response.ok) {
     return <div>오류가 발생했습니다. ...</div>;
