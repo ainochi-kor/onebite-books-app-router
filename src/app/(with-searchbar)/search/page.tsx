@@ -1,10 +1,18 @@
-import React from "react";
+import books from "@/mock/books.json";
+import BookItem from "@/components/book-item";
 
-const SearchPage: React.FC<{
-  searchParams: Promise<{ q: string }>;
-}> = async ({ searchParams }) => {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string }>;
+}) {
   const { q } = await searchParams;
-  return <div>SearchPage: {q}</div>;
-};
 
-export default SearchPage;
+  return (
+    <div>
+      {books.map((book) => (
+        <BookItem key={book.id} {...book} />
+      ))}
+    </div>
+  );
+}
