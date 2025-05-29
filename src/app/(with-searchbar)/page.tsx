@@ -8,7 +8,7 @@ async function AllBooks() {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`,
     {
-      cache: "no-store", // 매번 최신 데이터를 가져오기 위해 캐시를 사용하지 않음
+      cache: "force-cache", // 매번 최신 데이터를 가져오기 위해 캐시를 사용하지 않음
     }
   );
   if (!response.ok) {
@@ -58,9 +58,7 @@ export default async function Home() {
     <div className={style.container}>
       <section>
         <h3>지금 추천하는 도서</h3>
-        {books.map((book) => (
-          <BookItem key={book.id} {...book} />
-        ))}
+        <RecoBooks />
       </section>
       <section>
         <h3>등록된 모든 도서</h3>
